@@ -4,13 +4,13 @@ const SmurfForm = () => {
     const [name, setName] = useState('');
     const [age, setAge] = useState(undefined);
     const [height, setHeight] = useState('');
-    handleName = (event) => {
+    const handleName = (event) => {
         setName(event.target.value);
     }
-    handleAge = (event) => {
+    const handleAge = (event) => {
         setAge(event.target.value);
     }
-    handleHeight = (event) => {
+    const handleHeight = (event) => {
         setHeight(event.target.value);
     }
     return (
@@ -27,3 +27,5 @@ const SmurfForm = () => {
         </form>
     )
 }
+
+export default SmurfForm;
