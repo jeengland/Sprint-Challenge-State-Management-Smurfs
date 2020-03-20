@@ -13,23 +13,26 @@ const SmurfForm = () => {
         setAge(parseInt(event.target.value));
     }
     const handleHeight = (event) => {
-        setHeight(`${event.target.value}cm`);
+        setHeight(event.target.value);
     }
     const { postSmurf } = useContext(FormContext);
     const handleSubmit = (event) => {
         event.preventDefault();
-        postSmurf({ name, age, height })
+        postSmurf({ name, age, height: `${height}cm` });
+        setName('');
+        setAge(undefined);
+        setHeight('');
     }
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor='name'>Name:
-                <input type='text' name='name' id='name' autoComplete='off' onChange={handleName}/>
+                <input type='text' name='name' id='name' autoComplete='off' value={name} onChange={handleName}/>
             </label>
             <label htmlFor='age'>Age:
-                <input type='number' name='age' id='age' autoComplete='off' onChange={handleAge}/>
+                <input type='number' name='age' id='age' autoComplete='off' value={age} onChange={handleAge}/>
             </label>
             <label htmlFor='height'>Height:
-                <input type='number' name='height' id='height' autoComplete='off' onChange={handleHeight}/>
+                <input type='number' name='height' id='height' autoComplete='off' value={height} onChange={handleHeight}/>
             </label>
             <input type='submit' />
         </form>

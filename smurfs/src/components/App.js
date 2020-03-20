@@ -22,8 +22,13 @@ const App = () => {
         .post('http://localhost:3333/smurfs', smurf)
         .then((response) => setData(response.data))
     }
+    const deleteSmurf = (id) => {
+      axios
+        .delete(`http://localhost:3333/smurfs/${id}`)
+        .then((response) => setData(response.data))
+    }
     return (
-      <SmurfContext.Provider value={{ data }}>
+      <SmurfContext.Provider value={{ data, deleteSmurf }}>
         <FormContext.Provider value={{ postSmurf }}>
           <SmurfForm />
           <Smurfs />
