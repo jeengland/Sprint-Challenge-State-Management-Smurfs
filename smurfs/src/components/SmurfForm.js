@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+import FormContext from '../contexts/FormContext';
 
 const SmurfForm = () => {
     const [name, setName] = useState('');
@@ -8,13 +10,18 @@ const SmurfForm = () => {
         setName(event.target.value);
     }
     const handleAge = (event) => {
-        setAge(event.target.value);
+        setAge(parseInt(event.target.value));
     }
     const handleHeight = (event) => {
-        setHeight(event.target.value);
+        setHeight(`${event.target.value}cm`);
+    }
+    const { postSmurf } = useContext(FormContext);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        postSmurf({ name, age, height })
     }
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <label htmlFor='name'>Name:
                 <input type='text' name='name' id='name' autoComplete='off' onChange={handleName}/>
             </label>
@@ -24,6 +31,7 @@ const SmurfForm = () => {
             <label htmlFor='height'>Height:
                 <input type='number' name='height' id='height' autoComplete='off' onChange={handleHeight}/>
             </label>
+            <input type='submit' />
         </form>
     )
 }

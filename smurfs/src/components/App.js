@@ -8,6 +8,7 @@ import Smurfs from './Smurfs';
 import SmurfForm from './SmurfForm';
 
 import SmurfContext from '../contexts/SmurfContext';
+import FormContext from '../contexts/FormContext';
 
 const App = () => {
     const [data, setData] = useState([]);
@@ -19,12 +20,14 @@ const App = () => {
     const postSmurf = (smurf) => {
       axios
         .post('http://localhost:3333/smurfs', smurf)
-        .then((response) => console.log(response))
+        .then((response) => setData(response.data))
     }
     return (
       <SmurfContext.Provider value={{ data }}>
-        <SmurfForm />
-        <Smurfs />
+        <FormContext.Provider value={{ postSmurf }}>
+          <SmurfForm />
+          <Smurfs />
+        </FormContext.Provider>
       </SmurfContext.Provider>
     );
 }
