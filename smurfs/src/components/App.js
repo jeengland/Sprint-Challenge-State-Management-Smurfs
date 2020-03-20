@@ -5,6 +5,7 @@ import axios from 'axios';
 import "./App.css";
 
 import SmurfContext from '../contexts/SmurfContext';
+import Smurfs from './Smurfs';
 
 const App = () => {
     const [data, setData] = useState([]);
@@ -14,13 +15,8 @@ const App = () => {
         .then((response) => setData(response.data))
     }, [])
     return (
-      <SmurfContext.Provider value={data}>
-        <div className="App">
-          <h1>SMURFS! 2.0 W/ Redux</h1>
-          <div>Welcome to your state management version of Smurfs!</div>
-          <div>Start inside of your `src/index.js` file!</div>
-          <div>Have fun!</div>
-        </div>
+      <SmurfContext.Provider value={{ data }}>
+        <Smurfs />
       </SmurfContext.Provider>
     );
 }
